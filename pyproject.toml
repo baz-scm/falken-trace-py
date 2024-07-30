@@ -1,0 +1,87 @@
+[tool.poetry]
+name = "baz-trace-py"
+version = "0.1.0"
+description = "Enhances traces with code metadata"
+authors = ["Baz <info@baz.co>"]
+license = "Apache-2.0"
+
+readme = "README.md"
+
+packages = [
+    { include = "baz_trace" }
+]
+
+repository = "https://github.com/baz-scm/baz-trace-py"
+
+keywords = ["observability", "tracing"]
+
+classifiers = [
+    "License :: OSI Approved :: Apache Software License",
+    "Programming Language :: Python :: 3 :: Only",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Typing :: Typed"
+]
+
+[tool.poetry.dependencies]
+python = "^3.8"
+typing-extensions = ">=4.6.0"
+wrapt = ">=1.15.0"
+
+[tool.poetry.dev-dependencies]
+ddtrace = "^2.10.0"
+mypy = "^1.11.0"
+pre-commit = "^3.5.0" # 3.6+ needs Python 3.9
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.mypy]
+files = "baz_trace"
+local_partial_types = true # will become the new default from version 2
+strict = true
+pretty = true
+
+[[tool.mypy.overrides]]
+module = [
+    "wrapt"
+]
+ignore_missing_imports = true
+
+[tool.ruff]
+line-length = 120
+target-version = "py38"
+
+[tool.ruff.lint]
+preview = true
+select = [
+    "A",
+    "ANN",
+    "ARG",
+    "B",
+    "E",
+    "F",
+    "FURB",
+    "I",
+    "ISC",
+    "N",
+    "PERF",
+    "PIE",
+    "PLE",
+    "PLW",
+    "RUF",
+    "S",
+    "SIM",
+    "T10",
+    "UP",
+    "W",
+    "YTT",
+]
+ignore = ["E501"] # ruff fromat takes care of it
+
+fixable = ["I001"]

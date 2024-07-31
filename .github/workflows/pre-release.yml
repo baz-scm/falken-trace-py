@@ -1,0 +1,68 @@
+name: Pre-release
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - master
+    paths-ignore:
+      - 'README.md'
+      - '.github/**'
+      - '.pre-commit-config.yaml'
+
+permissions:
+  contents: read
+
+env:
+  POETRY_VERSION: '1.8.3'
+
+jobs:
+  vars:
+    # hack to pass env vars to reusable workflows
+    # https://github.com/orgs/community/discussions/26671
+    runs-on: ubuntu-latest
+    outputs:
+      poetry-version: ${{ env.POETRY_VERSION }}
+    steps:
+      - run: echo "Exposing env vars"
+  pre-commit:
+    uses: ./.github/workflows/pre-commit.yml
+  mypy:
+    needs: vars
+    uses: ./.github/workflows/mypy.yml
+    with:
+      poetry-version: ${{ needs.vars.outputs.poetry-version }}
+
+  publish:
+    needs: [pre-commit, mypy]
+    runs-on: ubuntu-latest
+    environment: release
+    permissions:
+      contents: write
+      # IMPORTANT: this permission is mandatory for trusted publishing to pypi
+      id-token: write
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up poetry ${{ env.POETRY_VERSION }}
+        run: pipx install poetry==${{ env.POETRY_VERSION }}
+      - uses: actions/setup-python@v5
+        with:
+          cache: poetry
+      - name: Install dependencies
+        run: poetry install --only main
+      - name: Bump prerelease version
+        run: |
+          # bump version
+          poetry version prerelease
+          new_version=$(poetry version -s)
+
+          # commit and push
+          git config --global user.name 'gruebel'
+          git config --global user.email 'gruebel@users.noreply.github.com'
+          git add pyproject.toml
+          git commit -m "publish version ${new_version}"
+          git push
+      - name: Build Python package
+        run: poetry build
+      - name: Publish prerelease to PyPI
+        uses: pypa/gh-action-pypi-publish@v1

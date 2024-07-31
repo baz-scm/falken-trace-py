@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "baz-trace-py"
+name = "baz-trace"
 version = "0.1.0"
 description = "Enhances traces with code metadata"
 authors = ["Baz <info@baz.co>"]

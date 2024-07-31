@@ -1,20 +1,27 @@
 name: PR
 
 on:
-  push:
-    branches:
-      - master
-    paths-ignore:
-      - 'README.md'
   pull_request:
 
 permissions:
   contents: read
 
+env:
+  POETRY_VERSION: '1.8.3'
+
 jobs:
-  pre-commit:
+  vars:
+    # hack to pass env vars to reusable workflows
+    # https://github.com/orgs/community/discussions/26671
     runs-on: ubuntu-latest
+    outputs:
+      poetry-version: ${{ env.POETRY_VERSION }}
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
-      - uses: pre-commit/action@v3.0.1
+      - run: echo "Exposing env vars"
+  pre-commit:
+    uses: ./.github/workflows/pre-commit.yml
+  mypy:
+    needs: vars
+    uses: ./.github/workflows/mypy.yml
+    with:
+      poetry-version: ${{ needs.vars.outputs.poetry-version }}

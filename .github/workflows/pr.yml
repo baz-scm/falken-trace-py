@@ -1,6 +1,9 @@
 name: PR
 
 on:
+  push:
+    branches:
+      - main
   pull_request:
 
 permissions:
@@ -10,18 +13,32 @@ env:
   POETRY_VERSION: '1.8.3'
 
 jobs:
-  vars:
-    # hack to pass env vars to reusable workflows
-    # https://github.com/orgs/community/discussions/26671
-    runs-on: ubuntu-latest
-    outputs:
-      poetry-version: ${{ env.POETRY_VERSION }}
-    steps:
-      - run: echo "Exposing env vars"
   pre-commit:
-    uses: ./.github/workflows/pre-commit.yml
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version-file: '.python-version'
+      - uses: pre-commit/action@v3.0.1
   mypy:
-    needs: vars
-    uses: ./.github/workflows/mypy.yml
-    with:
-      poetry-version: ${{ needs.vars.outputs.poetry-version }}
+    runs-on: ubuntu-latest
+    env:
+      MYPY_CACHE_DIR: ~/.cache/mypy
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up poetry ${{ env.POETRY_VERSION }}
+        run: pipx install poetry==${{ env.POETRY_VERSION }}
+      - uses: actions/setup-python@v5
+        id: setup-python
+        with:
+          python-version-file: '.python-version'
+          cache: poetry
+      - name: Install dependencies
+        run: poetry install
+      - uses: actions/cache@v4
+        with:
+          path: ${{ env.MYPY_CACHE_DIR }}
+          key: mypy-${{ runner.os }}-python-${{ steps.setup-python.outputs.python-version }}-${{ hashFiles('poetry.lock') }}
+      - name: Run Mypy
+        run: poetry run mypy

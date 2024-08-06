@@ -36,6 +36,7 @@ wrapt = ">=1.15.0"
 ddtrace = "^2.10.0"
 mypy = "^1.11.0"
 pre-commit = "^3.5.0" # 3.6+ needs Python 3.9
+pytest = "^8.3.0"
 
 [build-system]
 requires = ["poetry-core"]
@@ -85,3 +86,6 @@ select = [
 ignore = ["E501"] # ruff fromat takes care of it
 
 fixable = ["I001"]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/**/*" = ["S101"]

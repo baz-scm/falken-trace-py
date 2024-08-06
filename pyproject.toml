@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "baz-trace-py"
+name = "falken-trace"
 version = "0.1.0"
 description = "Enhances traces with code metadata"
 authors = ["Baz <info@baz.co>"]
@@ -8,10 +8,10 @@ license = "Apache-2.0"
 readme = "README.md"
 
 packages = [
-    { include = "baz_trace" }
+    { include = "falken_trace" }
 ]
 
-repository = "https://github.com/baz-scm/baz-trace-py"
+repository = "https://github.com/baz-scm/falken-trace-py"
 
 keywords = ["observability", "tracing"]
 
@@ -42,7 +42,7 @@ requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
 
 [tool.mypy]
-files = "baz_trace"
+files = "falken_trace"
 local_partial_types = true # will become the new default from version 2
 strict = true
 pretty = true

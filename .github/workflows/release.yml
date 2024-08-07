@@ -52,4 +52,4 @@ jobs:
       - name: Build Python package
         run: poetry build
       - name: Publish Release to PyPI
-        uses: pypa/gh-action-pypi-publish@v1
+        uses: pypa/gh-action-pypi-publish@release/v1

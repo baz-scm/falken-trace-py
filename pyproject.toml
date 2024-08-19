@@ -33,7 +33,7 @@ typing-extensions = ">=4.6.0"
 wrapt = ">=1.15.0"
 
 [tool.poetry.dev-dependencies]
-ddtrace = "^2.10.4"
+ddtrace = "^2.10.6"
 mypy = "^1.11.0"
 pre-commit = "^3.5.0" # 3.6+ needs Python 3.9
 pytest = "^8.3.0"

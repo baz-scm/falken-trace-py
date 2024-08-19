@@ -1,5 +1,9 @@
 # falken-trace-py
 
+[![PyPI](https://img.shields.io/pypi/v/falken-trace)](https://pypi.org/project/falken-trace/)
+[![PyPI - Python Version](https://img.shields.io/pypi/pyversions/falken-trace)](https://github.com/baz-scm/falken-trace-py)
+![CodeQL](https://github.com/baz-scm/falken-trace-py/workflows/CodeQL/badge.svg)
+
 ## Getting Started
 
 ### Requirements

@@ -21,8 +21,7 @@ def wrap_dd_span(wrapped: Callable[P, Span], _instance: Tracer, args: P.args, kw
         return span
 
     work_dir = os.getcwd()
-    stack = inspect.stack()
-    for frame_info in stack[1:]:  # first frame is itself
+    for frame_info in inspect.stack()[1:]:  # first frame is itself
         if frame_info.function == "func_wrapper" and "ddtrace" in frame_info.filename:  # noqa: SIM102
             # trying to get the actual definition of the callable
             if (func := frame_info.frame.f_locals.get("f")) or (func := frame_info.frame.f_locals.get("coro")):

@@ -33,10 +33,14 @@ typing-extensions = ">=4.6.0"
 wrapt = ">=1.15.0"
 
 [tool.poetry.dev-dependencies]
-ddtrace = "^2.10.4"
 mypy = "^1.11.0"
 pre-commit = "^3.5.0" # 3.6+ needs Python 3.9
 pytest = "^8.3.0"
+# integration tests
+ddtrace = "^2.10.0"
+fastapi = "^0.112.0"
+# For the FastAPI test client
+httpx = ">=0.23.0"
 
 [build-system]
 requires = ["poetry-core"]

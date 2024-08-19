@@ -18,7 +18,7 @@ def test_wrap_dd_span_with_start_span() -> None:
     assert tags.get("code.filepath") is None  # should be `None`, because the `tracer` decorator was not used
     assert tags.get("code.lineno") is None
     assert tags.get("code.func") is None
-    assert tags.get("code.wrap_filepath").endswith("test_falken.py")
+    assert tags.get("code.wrap_filepath").endswith("test_datadog.py")
     assert tags.get("code.wrap_lineno") == "13"
     assert tags.get("code.wrap_func") == "test_wrap_dd_span_with_start_span"
 
@@ -47,10 +47,10 @@ def test_wrap_dd_span_with_decorator() -> None:
     # making sure we have a relative path
     assert not tags.get("code.filepath").startswith("/")
 
-    assert tags.get("code.filepath").endswith("test_falken.py")
+    assert tags.get("code.filepath").endswith("test_datadog.py")
     assert tags.get("code.lineno") == "35"
     assert tags.get("code.func") == "add"
-    assert tags.get("code.wrap_filepath").endswith("test_falken.py")
+    assert tags.get("code.wrap_filepath").endswith("test_datadog.py")
     assert tags.get("code.wrap_lineno") == "41"
     assert tags.get("code.wrap_func") == "test_wrap_dd_span_with_decorator"
 

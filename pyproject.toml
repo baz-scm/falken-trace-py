@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "falken-trace"
-version = "0.1.0"
+version = "0.1.1"
 description = "Enhances traces with code metadata"
 authors = ["Baz <info@baz.co>"]
 license = "Apache-2.0"

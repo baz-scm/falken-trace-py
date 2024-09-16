@@ -35,10 +35,10 @@ wrapt = ">=1.15.0"
 [tool.poetry.dev-dependencies]
 mypy = "^1.11.2"
 pre-commit = "^3.5.0" # 3.6+ needs Python 3.9
-pytest = "^8.3.0"
+pytest = "^8.3.3"
 # integration tests
-ddtrace = "^2.11.3"
-fastapi = "^0.114.0"
+ddtrace = "^2.12.2"
+fastapi = "^0.114.2"
 # For the FastAPI test client
 httpx = ">=0.23.0"
 

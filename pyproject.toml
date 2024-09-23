@@ -38,7 +38,7 @@ pre-commit = "^3.5.0" # 3.6+ needs Python 3.9
 pytest = "^8.3.3"
 # integration tests
 ddtrace = "^2.12.2"
-fastapi = "^0.114.2"
+fastapi = "^0.115.0"
 # For the FastAPI test client
 httpx = ">=0.23.0"
 

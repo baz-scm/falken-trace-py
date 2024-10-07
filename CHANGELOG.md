@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.1.2](https://github.com/baz-scm/falken-trace-py/compare/v0.1.1...v0.1.2) (2024-10-07)
+
+
+### ✨ New Features
+
+* add FastAPI entrypoint parameters to span ([#17](https://github.com/baz-scm/falken-trace-py/issues/17)) ([b70863c](https://github.com/baz-scm/falken-trace-py/commit/b70863c67650d8346986a646a223795bc4bd65a8))
+
 ## [0.1.1](https://github.com/baz-scm/falken-trace-py/compare/v0.1.0...v0.1.1) (2024-08-19)
 
 

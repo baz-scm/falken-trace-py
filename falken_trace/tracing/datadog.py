@@ -17,6 +17,7 @@ P = ParamSpec("P")
 
 def wrap_dd_span(wrapped: Callable[P, Span], _instance: Tracer, args: P.args, kwargs: P.kwargs) -> Span:
     span: Span = wrapped(*args, **kwargs)
+    
     if not env_vars_config.falken_trace_enabled:
         return span
 

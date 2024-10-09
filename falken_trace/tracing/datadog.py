@@ -19,6 +19,7 @@ def wrap_dd_span(wrapped: Callable[P, Span], _instance: Tracer, args: P.args, kw
     span: Span = wrapped(*args, **kwargs)
     
     if not env_vars_config.falken_trace_enabled:
+        print("Skipping falken trace")
         return span
 
     work_dir = os.getcwd()

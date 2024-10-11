@@ -53,7 +53,7 @@ def test_wrap_fastapi_entrypoint_span_with_async_func() -> None:
     span: Optional[ddtrace.Span] = None  # can't use the newer syntax here, otherwise the FastAPI setup breaks
 
     @app.get("/")
-    async def ahello() -> Dict[str, str]:  # noqa: RUF029
+    async def ahello() -> Dict[str, str]:
         nonlocal span  # bind current span to check, if everything was set at the end
         span = ddtrace.tracer.current_span()
         return {"msg": "Hello World"}
@@ -87,7 +87,7 @@ def test_wrap_fastapi_entrypoint_span_with_str_payload() -> None:
     span: Optional[ddtrace.Span] = None  # can't use the newer syntax here, otherwise the FastAPI setup breaks
 
     @app.post("/")
-    async def ahello(body: Annotated[str, Body(media_type="text/plain")]) -> Dict[str, str]:  # noqa: RUF029
+    async def ahello(body: Annotated[str, Body(media_type="text/plain")]) -> Dict[str, str]:
         nonlocal span  # bind current span to check, if everything was set at the end
         span = ddtrace.tracer.current_span()
         return {"msg": f"Hello {body}"}
@@ -125,7 +125,7 @@ def test_wrap_fastapi_entrypoint_span_with_base_model_payload() -> None:
     span: Optional[ddtrace.Span] = None  # can't use the newer syntax here, otherwise the FastAPI setup breaks
 
     @app.post("/items/")
-    async def create_item(item: Item) -> Item:  # noqa: RUF029
+    async def create_item(item: Item) -> Item:
         nonlocal span  # bind current span to check, if everything was set at the end
         span = ddtrace.tracer.current_span()
         return item

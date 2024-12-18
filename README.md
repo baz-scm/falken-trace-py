@@ -27,7 +27,7 @@
 
 ## 🚀 What is Falken Trace?
 
-Falken Trace is an open-source library that enhances OpenTelemetry by pinpointing **specific code elements**—file names, function names, and line numbers—responsible for system behaviors.
+Falken Trace extends OpenTelemetry and Datadog for Python by pinpointing **file names, function names**, and **line numbers** that generate spans. It addresses gaps in default observability implementations, making tracing faster and more actionable.
 
 Default OpenTelemetry tracing for Python lacks this granularity, which we uncovered while building our contextual code review platform at [baz.co](https://baz.co).
 

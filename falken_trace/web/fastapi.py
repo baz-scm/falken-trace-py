@@ -2,7 +2,6 @@ from __future__ import annotations
 
 import inspect
 import os
-from collections.abc import Awaitable
 from typing import TYPE_CHECKING, Any, Callable, TypeVar
 
 from typing_extensions import ParamSpec
@@ -11,6 +10,8 @@ from falken_trace.config import env_vars_config
 from falken_trace.utils import flatten_dict, normalize_path, removeprefix
 
 if TYPE_CHECKING:
+    from collections.abc import Awaitable
+
     from ddtrace import Span
 
 if env_vars_config.dd_trace_enabled:

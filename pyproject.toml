@@ -1,20 +1,12 @@
-[tool.poetry]
+[project]
 name = "falken-trace"
 version = "0.1.1"
 description = "Enhances traces with code metadata"
-authors = ["Baz <info@baz.co>"]
-license = "Apache-2.0"
-
-readme = "README.md"
-
-packages = [
-    { include = "falken_trace" }
+authors = [
+    { name = "Baz", email = "info@baz.co" }
 ]
-
-repository = "https://github.com/baz-scm/falken-trace-py"
-
+license = "Apache-2.0"
 keywords = ["observability", "tracing"]
-
 classifiers = [
     "License :: OSI Approved :: Apache Software License",
     "Programming Language :: Python :: 3 :: Only",
@@ -26,14 +18,27 @@ classifiers = [
     "Programming Language :: Python :: 3.13",
     "Typing :: Typed"
 ]
+readme = "README.md"
 
-[tool.poetry.dependencies]
-python = "^3.8"
-typing-extensions = ">=4.6.0"
-wrapt = ">=1.15.0"
+requires-python = ">=3.8"
 
-[tool.poetry.dev-dependencies]
-mypy = "^1.14.1"
+dependencies = [
+    "typing-extensions>=4.6.0",
+    "wrapt>=1.15.0",
+]
+
+[project.urls]
+repository = "https://github.com/baz-scm/falken-trace-py"
+changelog = "https://github.com/baz-scm/falken-trace-py/blob/main/CHANGELOG.md"
+releases = "https://github.com/baz-scm/falken-trace-py/releases"
+
+[tool.poetry]
+packages = [
+    { include = "falken_trace" }
+]
+
+[tool.poetry.group.dev.dependencies]
+mypy = {extras = ["faster-cache"], version = "^1.14.1"}
 pre-commit = "^3.5.0" # 3.6+ needs Python 3.9
 pytest = "^8.3.4"
 # integration tests
@@ -81,10 +86,12 @@ select = [
     "PLE",
     "PLW",
     "PT",
+    "PYI",
     "RUF",
     "S",
     "SIM",
     "T10",
+    "TC",
     "UP",
     "W",
     "YTT",

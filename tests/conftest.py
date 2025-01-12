@@ -1,10 +1,13 @@
 from __future__ import annotations
 
-from collections.abc import Generator
+from typing import TYPE_CHECKING
 
 import pytest
 
 from falken_trace.config import env_vars_config
+
+if TYPE_CHECKING:
+    from collections.abc import Generator
 
 
 @pytest.fixture

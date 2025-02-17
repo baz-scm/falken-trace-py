@@ -7,7 +7,7 @@ from typing import TYPE_CHECKING, Callable
 from typing_extensions import ParamSpec
 
 from falken_trace.config import env_vars_config
-from falken_trace.utils import normalize_path
+from falken_trace.utils import getouterframes, normalize_path
 
 if TYPE_CHECKING:
     from ddtrace import Span, Tracer
@@ -21,7 +21,7 @@ def wrap_dd_span(wrapped: Callable[P, Span], _instance: Tracer, args: P.args, kw
         return span
 
     work_dir = os.getcwd()
-    for frame_info in inspect.stack()[1:]:  # first frame is itself
+    for frame_info in getouterframes(inspect.currentframe()):
         if frame_info.function == "func_wrapper" and "ddtrace" in frame_info.filename:  # noqa: SIM102
             # trying to get the actual definition of the callable
             if (func := frame_info.frame.f_locals.get("f")) or (func := frame_info.frame.f_locals.get("coro")):

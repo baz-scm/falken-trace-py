@@ -1,8 +1,27 @@
 from __future__ import annotations
 
+import inspect
 import os
 from importlib.util import find_spec
-from typing import Any
+from typing import TYPE_CHECKING, Any
+
+if TYPE_CHECKING:
+    from collections.abc import Iterator
+    from types import FrameType
+
+
+def getouterframes(frame: FrameType | None, max_frames: int = 5) -> Iterator[inspect.FrameInfo]:
+    """Get a records for a frame and all higher (calling) frames.
+
+    Copied and adjusted version of inspect.getouterframes()
+    """
+    frame_count = 0
+    while frame and frame_count < max_frames:
+        frameinfo = (frame,) + inspect.getframeinfo(frame, 0)  # noqa: RUF005
+        if frame_count:  # the first frame is itself
+            yield inspect.FrameInfo(*frameinfo)
+        frame = frame.f_back
+        frame_count += 1
 
 
 # method 'str.removeprefix()' was added in Python 3.9

@@ -1,5 +1,27 @@
 # Changelog
 
+## [0.1.2](https://github.com/baz-scm/falken-trace-py/compare/v0.1.1...v0.1.2) (2025-02-18)
+
+
+### 🐛 Bug Fixes
+
+* only patch FastAPI when it is used ([#27](https://github.com/baz-scm/falken-trace-py/issues/27)) ([0fddf7d](https://github.com/baz-scm/falken-trace-py/commit/0fddf7da7832bfa55626949a4cb09868c6471e43))
+
+
+### ✨ New Features
+
+* add FastAPI entrypoint parameters to span ([#17](https://github.com/baz-scm/falken-trace-py/issues/17)) ([b70863c](https://github.com/baz-scm/falken-trace-py/commit/b70863c67650d8346986a646a223795bc4bd65a8))
+
+
+### 📚 Documentation
+
+* Readme upgrade https://baz-scm.atlassian.net/browse/CR-763 ([#38](https://github.com/baz-scm/falken-trace-py/issues/38)) ([37e6d1e](https://github.com/baz-scm/falken-trace-py/commit/37e6d1e401be46995355ba2b32e2fc880579ecfe))
+
+
+### 🚀 Performance
+
+* improve frame info extraction ([#42](https://github.com/baz-scm/falken-trace-py/issues/42)) ([b5bc8d9](https://github.com/baz-scm/falken-trace-py/commit/b5bc8d92af963d66f9f31aae93bfb8bd5ccd682e))
+
 ## [0.1.1](https://github.com/baz-scm/falken-trace-py/compare/v0.1.0...v0.1.1) (2024-08-19)
 
 

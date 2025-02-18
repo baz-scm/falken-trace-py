@@ -10,16 +10,16 @@ if TYPE_CHECKING:
     from types import FrameType
 
 
-def getouterframes(frame: FrameType | None, max_frames: int = 5) -> Iterator[inspect.FrameInfo]:
+def get_outer_frames(frame: FrameType | None, max_frames: int = 5) -> Iterator[inspect.FrameInfo]:
     """Get a records for a frame and all higher (calling) frames.
 
     Copied and adjusted version of inspect.getouterframes()
     """
     frame_count = 0
     while frame and frame_count < max_frames:
-        frameinfo = (frame,) + inspect.getframeinfo(frame, 0)  # noqa: RUF005
+        frame_info = (frame,) + inspect.getframeinfo(frame, 0)  # noqa: RUF005
         if frame_count:  # the first frame is itself
-            yield inspect.FrameInfo(*frameinfo)
+            yield inspect.FrameInfo(*frame_info)
         frame = frame.f_back
         frame_count += 1
 

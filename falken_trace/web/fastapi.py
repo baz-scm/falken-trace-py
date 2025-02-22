@@ -7,7 +7,7 @@ from typing import TYPE_CHECKING, Any, Callable, TypeVar
 from typing_extensions import ParamSpec
 
 from falken_trace.config import env_vars_config
-from falken_trace.utils import flatten_dict, normalize_path, removeprefix
+from falken_trace.utils import flatten_dict, normalize_path
 
 if TYPE_CHECKING:
     from collections.abc import Awaitable
@@ -15,7 +15,11 @@ if TYPE_CHECKING:
     from ddtrace import Span
 
 if env_vars_config.dd_trace_enabled:
-    from ddtrace import tracer
+    try:
+        from ddtrace.trace import tracer
+    except ImportError:
+        # keeping it to support lower `ddtrace` versions
+        from ddtrace import tracer  # type:ignore[attr-defined]
 
 T = TypeVar("T")
 P = ParamSpec("P")
@@ -25,7 +29,10 @@ FUNCTION_PREFIXES = ("async def ", "def ")
 
 
 async def wrap_fastapi_entrypoint_span(
-    wrapped: Callable[P, Awaitable[T]], _instance: None, args: P.args, kwargs: P.kwargs
+    wrapped: Callable[P, Awaitable[T]],
+    _instance: None,
+    args: Any,  # noqa: ANN401
+    kwargs: Any,  # noqa: ANN401
 ) -> T:
     if (dependant := kwargs.get("dependant")) and hasattr(dependant, "call"):
         work_dir = os.getcwd()
@@ -40,7 +47,7 @@ async def wrap_fastapi_entrypoint_span(
             lineno += line[0]
             line = line[1].split("(", maxsplit=1)[0]
             for prefix in FUNCTION_PREFIXES:
-                line = removeprefix(line, prefix)
+                line = line.removeprefix(prefix)
 
         if env_vars_config.dd_trace_enabled and (span := tracer.current_span()):
             # can be `None`, if DD is disabled or FastAPI is not patched

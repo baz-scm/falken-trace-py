@@ -54,7 +54,7 @@ jobs:
         exclude:
           # ddtrace fails to build
           - os: windows-latest
-            node: "3.13"
+            python-version: "3.13"
       fail-fast: false
     steps:
       - uses: actions/checkout@v4

@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import inspect
 import os
-from typing import TYPE_CHECKING, Callable
+from typing import TYPE_CHECKING, Any, Callable
 
 from typing_extensions import ParamSpec
 
@@ -15,7 +15,7 @@ if TYPE_CHECKING:
 P = ParamSpec("P")
 
 
-def wrap_dd_span(wrapped: Callable[P, Span], _instance: Tracer, args: P.args, kwargs: P.kwargs) -> Span:
+def wrap_dd_span(wrapped: Callable[P, Span], _instance: Tracer, args: Any, kwargs: Any) -> Span:  # noqa: ANN401
     span: Span = wrapped(*args, **kwargs)
     if not env_vars_config.falken_trace_enabled:
         return span

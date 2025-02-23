@@ -1,6 +1,4 @@
-from typing import Dict, Optional
-
-from typing_extensions import Annotated
+from typing import Annotated, Optional
 
 
 def test_wrap_fastapi_entrypoint_span_with_sync_func() -> None:
@@ -19,7 +17,7 @@ def test_wrap_fastapi_entrypoint_span_with_sync_func() -> None:
     span: Optional[ddtrace.Span] = None  # can't use the newer syntax here, otherwise the FastAPI setup breaks
 
     @app.get("/")
-    def hello() -> Dict[str, str]:
+    def hello() -> dict[str, str]:
         nonlocal span  # bind current span to check, if everything was set at the end
         span = ddtrace.tracer.current_span()
         return {"msg": "Hello World"}
@@ -33,7 +31,7 @@ def test_wrap_fastapi_entrypoint_span_with_sync_func() -> None:
     tags = span.get_tags()
 
     assert tags.get("code.filepath").endswith("test_fastapi.py")
-    assert tags.get("code.lineno") == "22"
+    assert tags.get("code.lineno") == "20"
     assert tags.get("code.func") == "hello"
 
 
@@ -53,7 +51,7 @@ def test_wrap_fastapi_entrypoint_span_with_async_func() -> None:
     span: Optional[ddtrace.Span] = None  # can't use the newer syntax here, otherwise the FastAPI setup breaks
 
     @app.get("/")
-    async def ahello() -> Dict[str, str]:
+    async def ahello() -> dict[str, str]:
         nonlocal span  # bind current span to check, if everything was set at the end
         span = ddtrace.tracer.current_span()
         return {"msg": "Hello World"}
@@ -67,7 +65,7 @@ def test_wrap_fastapi_entrypoint_span_with_async_func() -> None:
     tags = span.get_tags()
 
     assert tags.get("code.filepath").endswith("test_fastapi.py")
-    assert tags.get("code.lineno") == "56"
+    assert tags.get("code.lineno") == "54"
     assert tags.get("code.func") == "ahello"
 
 
@@ -87,7 +85,7 @@ def test_wrap_fastapi_entrypoint_span_with_str_payload() -> None:
     span: Optional[ddtrace.Span] = None  # can't use the newer syntax here, otherwise the FastAPI setup breaks
 
     @app.post("/")
-    async def ahello(body: Annotated[str, Body(media_type="text/plain")]) -> Dict[str, str]:
+    async def ahello(body: Annotated[str, Body(media_type="text/plain")]) -> dict[str, str]:
         nonlocal span  # bind current span to check, if everything was set at the end
         span = ddtrace.tracer.current_span()
         return {"msg": f"Hello {body}"}

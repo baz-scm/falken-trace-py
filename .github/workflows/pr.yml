@@ -50,7 +50,11 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-latest, macos-latest, windows-latest]
-        python-version: ["3.8", "3.9", "3.10", "3.11", "3.12"] # `ddtrace` doesn't support Python 3.13 yet
+        python-version: ["3.9", "3.10", "3.11", "3.12", "3.13"]
+        exclude:
+          # ddtrace fails to build
+          - os: windows-latest
+            python-version: "3.13"
       fail-fast: false
     steps:
       - uses: actions/checkout@v4

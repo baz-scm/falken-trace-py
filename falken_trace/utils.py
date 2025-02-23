@@ -24,15 +24,8 @@ def get_outer_frames(frame: FrameType | None, max_frames: int = 5) -> Iterator[i
         frame_count += 1
 
 
-# method 'str.removeprefix()' was added in Python 3.9
-def removeprefix(input_str: str, prefix: str) -> str:
-    if input_str.startswith(prefix):
-        return input_str[len(prefix) :]
-    return input_str
-
-
 def normalize_path(path: str, path_prefix: str) -> str:
-    return removeprefix(path, path_prefix).lstrip("/")
+    return path.removeprefix(path_prefix).lstrip("/")
 
 
 def flatten_dict(data: dict[str, Any], parent_key: str = "") -> dict[str, str]:

@@ -1,6 +1,6 @@
 [project]
 name = "falken-trace"
-version = "0.1.2"
+version = "0.2.0"
 description = "Enhances traces with code metadata"
 authors = [
     { name = "Baz", email = "info@baz.co" }

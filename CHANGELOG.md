@@ -1,5 +1,16 @@
 # Changelog
 
+## [0.2.0](https://github.com/baz-scm/falken-trace-py/compare/v0.1.2...v0.2.0) (2025-02-23)
+
+
+### ⚠ BREAKING CHANGES
+
+* drop Python 3.8 support ([#43](https://github.com/baz-scm/falken-trace-py/issues/43))
+
+### 🔄 Refactoring
+
+* drop Python 3.8 support ([#43](https://github.com/baz-scm/falken-trace-py/issues/43)) ([51d22ed](https://github.com/baz-scm/falken-trace-py/commit/51d22edda4766f270d42dd0e8bd46fb5b12e80fc))
+
 ## [0.1.2](https://github.com/baz-scm/falken-trace-py/compare/v0.1.1...v0.1.2) (2025-02-18)
 
 

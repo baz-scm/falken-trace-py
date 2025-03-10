@@ -12,7 +12,7 @@ from falken_trace.utils import flatten_dict, normalize_path
 if TYPE_CHECKING:
     from collections.abc import Awaitable
 
-    from ddtrace import Span
+    from ddtrace.trace import Span
 
 if env_vars_config.dd_trace_enabled:
     try:

@@ -5,7 +5,7 @@ def test_wrap_dd_span_with_start_span() -> None:
     # given
     import falken_trace  # noqa
 
-    from ddtrace import Tracer
+    from ddtrace.trace import Tracer
 
     tracer = Tracer()
 
@@ -27,7 +27,7 @@ def test_wrap_dd_span_with_decorator() -> None:
     # given
     import falken_trace  # noqa
 
-    from ddtrace import tracer, Span
+    from ddtrace.trace import tracer, Span
 
     span: Span | None = None
 
@@ -59,7 +59,7 @@ def test_disbale_falken_trace(disbale_falken_trace) -> None:
     # given
     import falken_trace  # noqa
 
-    from ddtrace import Tracer
+    from ddtrace.trace import Tracer
 
     tracer = Tracer()
 

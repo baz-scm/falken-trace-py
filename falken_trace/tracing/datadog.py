@@ -10,7 +10,7 @@ from falken_trace.config import env_vars_config
 from falken_trace.utils import get_outer_frames, normalize_path
 
 if TYPE_CHECKING:
-    from ddtrace import Span, Tracer
+    from ddtrace.trace import Span, Tracer
 
 P = ParamSpec("P")
 

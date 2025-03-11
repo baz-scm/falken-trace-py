@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.2.1](https://github.com/baz-scm/falken-trace-py/compare/v0.2.0...v0.2.1) (2025-03-11)
+
+
+### ✨ New Features
+
+* support ddtrace v3 ([#45](https://github.com/baz-scm/falken-trace-py/issues/45)) ([07696f9](https://github.com/baz-scm/falken-trace-py/commit/07696f929748026b68de7404613e481d8bde2270))
+
 ## [0.2.0](https://github.com/baz-scm/falken-trace-py/compare/v0.1.2...v0.2.0) (2025-02-23)
 
 

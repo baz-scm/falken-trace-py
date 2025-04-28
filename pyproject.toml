@@ -38,11 +38,11 @@ packages = [
 
 [tool.poetry.group.dev.dependencies]
 mypy = {extras = ["faster-cache"], version = "^1.15.0"}
-pre-commit = "^4.1.0"
+pre-commit = "^4.2.0"
 pytest = "^8.3.4"
 # integration tests
-ddtrace = "^3.2.1"
-fastapi = "^0.115.11"
+ddtrace = "^3.5.1"
+fastapi = "^0.115.12"
 # For the FastAPI test client
 httpx = ">=0.23.0"
 

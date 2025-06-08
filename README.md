@@ -37,7 +37,9 @@ With Falken Trace, troubleshooting becomes faster, more precise, and far more ef
 ## Install
 
 ```shell
-pip install --upgrade falken-trace
+pip install falken-trace  # install via pip
+poetry add falken-trace   # install via poetry
+uv add falken-trace       # install via uv
 ```
 
 ## Usage

@@ -9,9 +9,6 @@ on:
 permissions:
   contents: read
 
-env:
-  POETRY_VERSION: '2.0.0'
-
 jobs:
   pre-commit:
     runs-on: ubuntu-latest
@@ -27,21 +24,17 @@ jobs:
       MYPY_CACHE_DIR: ~/.cache/mypy
     steps:
       - uses: actions/checkout@v4
-      - name: Set up poetry ${{ env.POETRY_VERSION }}
-        run: pipx install poetry==${{ env.POETRY_VERSION }}
-      - uses: actions/setup-python@v5
-        id: setup-python
+      - uses: astral-sh/setup-uv@v6
         with:
-          python-version-file: '.python-version'
-          cache: poetry
+          enable-cache: true
       - name: Install dependencies
-        run: poetry install
+        run: uv sync
       - uses: actions/cache@v4
         with:
           path: ${{ env.MYPY_CACHE_DIR }}
-          key: mypy-${{ runner.os }}-python-${{ steps.setup-python.outputs.python-version }}-${{ hashFiles('poetry.lock') }}
+          key: mypy-${{ runner.os }}-python-${{ steps.setup-python.outputs.python-version }}-${{ hashFiles('uv.lock') }}
       - name: Run Mypy
-        run: poetry run mypy
+        run: uv run --frozen mypy
 
   tests:
     needs: [pre-commit, mypy]
@@ -58,17 +51,11 @@ jobs:
       fail-fast: false
     steps:
       - uses: actions/checkout@v4
-      - name: Set up poetry ${{ env.POETRY_VERSION }}
-        run: pipx install poetry==${{ env.POETRY_VERSION }}
-      - name: Set up Python ${{ matrix.python-version }}
-        uses: actions/setup-python@v5
+      - uses: astral-sh/setup-uv@v6
         with:
+          enable-cache: true
           python-version: ${{ matrix.python-version }}
-          allow-prereleases: true
-          cache: poetry
       - name: Install dependencies
-        run: poetry install
-      - name: Install pytest plugin
-        run: poetry run pip install pytest-github-actions-annotate-failures
+        run: uv sync
       - name: Run pytest
-        run: poetry run python -m pytest tests/
+        run: uv run --frozen python -m pytest tests/

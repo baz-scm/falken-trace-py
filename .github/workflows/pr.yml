@@ -35,6 +35,10 @@ jobs:
           key: mypy-${{ runner.os }}-python-${{ steps.setup-python.outputs.python-version }}-${{ hashFiles('uv.lock') }}
       - name: Run Mypy
         run: uv run --frozen mypy
+        # testing ty
+      - name: Run ty
+        continue-on-error: true
+        run: uv run --frozen ty check
 
   tests:
     needs: [pre-commit, mypy]

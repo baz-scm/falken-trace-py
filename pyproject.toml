@@ -36,6 +36,7 @@ dev = [
     "mypy[faster-cache]>=1.16.0",
     "pre-commit>=4.2.0",
     "pytest>=8.3.5",
+    "ty",
     # integration tests
     "ddtrace>=3.9.1",
     "fastapi>=0.115.12",
@@ -110,3 +111,6 @@ fixable = ["I001"]
 
 [tool.uv]
 required-version = "~=0.7.0"
+
+[tool.ty.src]
+include = ["falken_trace"]

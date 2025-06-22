@@ -1,6 +1,6 @@
 import wrapt
 
-from falken_trace import config
+from falken_trace.common import config
 from falken_trace.tracing.datadog import wrap_dd_span
 from falken_trace.web.fastapi import wrap_fastapi_entrypoint_span
 

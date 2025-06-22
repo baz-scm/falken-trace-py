@@ -1,7 +1,7 @@
 import os
 from importlib.util import find_spec
 
-from falken_trace.utils import is_dd_trace_enabled
+from falken_trace.common.utils import is_dd_trace_enabled
 
 
 class EnvVarsConfig:

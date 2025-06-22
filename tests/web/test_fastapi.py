@@ -14,7 +14,7 @@ def test_wrap_fastapi_entrypoint_span_with_sync_func() -> None:
 
     app = FastAPI()
 
-    span: Optional[ddtrace.Span] = None  # can't use the newer syntax here, otherwise the FastAPI setup breaks
+    span: Optional[ddtrace.trace.Span] = None  # can't use the newer syntax here, otherwise the FastAPI setup breaks
 
     @app.get("/")
     def hello() -> dict[str, str]:
@@ -34,6 +34,14 @@ def test_wrap_fastapi_entrypoint_span_with_sync_func() -> None:
     assert tags.get("code.lineno") == "20"
     assert tags.get("code.func") == "hello"
 
+    # make sure the cache was filled
+    from falken_trace.common.cache import get_api_path_tags
+
+    span_tags = get_api_path_tags("/")
+    assert span_tags.file_path.endswith("test_fastapi.py")
+    assert span_tags.line_number == "20"
+    assert span_tags.func_name == "hello"
+
 
 def test_wrap_fastapi_entrypoint_span_with_async_func() -> None:
     # given
@@ -48,9 +56,9 @@ def test_wrap_fastapi_entrypoint_span_with_async_func() -> None:
 
     app = FastAPI()
 
-    span: Optional[ddtrace.Span] = None  # can't use the newer syntax here, otherwise the FastAPI setup breaks
+    span: Optional[ddtrace.trace.Span] = None  # can't use the newer syntax here, otherwise the FastAPI setup breaks
 
-    @app.get("/")
+    @app.get("/hello-get")
     async def ahello() -> dict[str, str]:
         nonlocal span  # bind current span to check, if everything was set at the end
         span = ddtrace.tracer.current_span()
@@ -59,13 +67,13 @@ def test_wrap_fastapi_entrypoint_span_with_async_func() -> None:
     client = TestClient(app)
 
     # when
-    client.get("/")
+    client.get("/hello-get")
 
     # then
     tags = span.get_tags()
 
     assert tags.get("code.filepath").endswith("test_fastapi.py")
-    assert tags.get("code.lineno") == "54"
+    assert tags.get("code.lineno") == "62"
     assert tags.get("code.func") == "ahello"
 
 
@@ -84,7 +92,7 @@ def test_wrap_fastapi_entrypoint_span_with_str_payload() -> None:
 
     span: Optional[ddtrace.Span] = None  # can't use the newer syntax here, otherwise the FastAPI setup breaks
 
-    @app.post("/")
+    @app.post("/hello-post")
     async def ahello(body: Annotated[str, Body(media_type="text/plain")]) -> dict[str, str]:
         nonlocal span  # bind current span to check, if everything was set at the end
         span = ddtrace.tracer.current_span()
@@ -93,7 +101,7 @@ def test_wrap_fastapi_entrypoint_span_with_str_payload() -> None:
     client = TestClient(app)
 
     # when
-    client.post("/", content="World", headers={"Content-Type": "text/plain"})
+    client.post("/hello-post", content="World", headers={"Content-Type": "text/plain"})
 
     # then
     tags = span.get_tags()
@@ -120,7 +128,7 @@ def test_wrap_fastapi_entrypoint_span_with_base_model_payload() -> None:
 
     app = FastAPI()
 
-    span: Optional[ddtrace.Span] = None  # can't use the newer syntax here, otherwise the FastAPI setup breaks
+    span: Optional[ddtrace.trace.Span] = None  # can't use the newer syntax here, otherwise the FastAPI setup breaks
 
     @app.post("/items/")
     async def create_item(item: Item) -> Item:

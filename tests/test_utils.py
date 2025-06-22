@@ -1,4 +1,4 @@
-from falken_trace.utils import flatten_dict
+from falken_trace.common.utils import flatten_dict
 
 
 def test_flatten_dict() -> None:

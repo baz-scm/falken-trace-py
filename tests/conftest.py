@@ -4,7 +4,7 @@ from typing import TYPE_CHECKING
 
 import pytest
 
-from falken_trace.config import env_vars_config
+from falken_trace.common.config import env_vars_config
 
 if TYPE_CHECKING:
     from collections.abc import Generator

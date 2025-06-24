@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.2.2](https://github.com/baz-scm/falken-trace-py/compare/v0.2.1...v0.2.2) (2025-06-24)
+
+
+### ✨ New Features
+
+* add API path cache ([#55](https://github.com/baz-scm/falken-trace-py/issues/55)) ([75a19a8](https://github.com/baz-scm/falken-trace-py/commit/75a19a841ed27856639278625bdc4799cc31fbff))
+
 ## [0.2.1](https://github.com/baz-scm/falken-trace-py/compare/v0.2.0...v0.2.1) (2025-03-11)
 
 

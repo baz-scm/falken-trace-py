@@ -9,15 +9,20 @@ on:
 permissions:
   contents: read
 
+env:
+  PREK_VERSION: '0.2.11'
+
 jobs:
-  pre-commit:
+  prek:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v5
       - uses: actions/setup-python@v6
         with:
           python-version-file: '.python-version'
-      - uses: pre-commit/action@v3.0.1
+      - uses: j178/prek-action@v1
+        with:
+          prek-version: ${{ env.PREK_VERSION }}
   mypy:
     runs-on: ubuntu-latest
     env:
@@ -37,7 +42,7 @@ jobs:
         run: uv run --frozen mypy
 
   tests:
-    needs: [pre-commit, mypy]
+    needs: [prek, mypy]
     name: ${{ matrix.os }} / ${{ matrix.python-version }}
     runs-on: ${{ matrix.os }}
     strategy:

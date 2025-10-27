@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.2.3](https://github.com/baz-scm/falken-trace-py/compare/v0.2.2...v0.2.3) (2025-10-27)
+
+
+### ✨ New Features
+
+* support Python 3.14 ([#65](https://github.com/baz-scm/falken-trace-py/issues/65)) ([8b739e9](https://github.com/baz-scm/falken-trace-py/commit/8b739e977a639ce66ccc92be7c781d1be43e4e75))
+
 ## [0.2.2](https://github.com/baz-scm/falken-trace-py/compare/v0.2.1...v0.2.2) (2025-06-24)
 
 

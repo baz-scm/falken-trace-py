@@ -28,14 +28,15 @@ dependencies = [
 ]
 
 [project.urls]
-repository = "https://github.com/baz-scm/falken-trace-py"
-changelog = "https://github.com/baz-scm/falken-trace-py/blob/main/CHANGELOG.md"
-releases = "https://github.com/baz-scm/falken-trace-py/releases"
+Homepage = "https://github.com/baz-scm/falken-trace-py"
+Repository = "https://github.com/baz-scm/falken-trace-py"
+Changelog = "https://github.com/baz-scm/falken-trace-py/blob/main/CHANGELOG.md"
+Releases = "https://github.com/baz-scm/falken-trace-py/releases"
 
 [dependency-groups]
 dev = [
-    "mypy>=1.18.0,<2.0.0",
-    "prek>=0.2.11,<0.3.0",
+    "mypy>=1.19.0,<2.0.0",
+    "prek>=0.2.19,<0.3.0",
     "pytest>=8.4.0,<9.0.0",
     # integration tests
     "ddtrace>=3.9.1,<4.0.0",
@@ -63,12 +64,6 @@ allow_redefinition_new = true # will become the new default from version 2
 fixed_format_cache = true # new caching mechanism
 strict = true
 pretty = true
-
-[[tool.mypy.overrides]]
-module = [
-    "wrapt"
-]
-ignore_missing_imports = true
 
 [tool.ruff]
 line-length = 120

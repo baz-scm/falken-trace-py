@@ -90,7 +90,7 @@ def test_wrap_fastapi_entrypoint_span_with_str_payload() -> None:
 
     app = FastAPI()
 
-    span: ddtrace.Span | None = None  # can't use the newer syntax here, otherwise the FastAPI setup breaks
+    span: ddtrace.trace.Span | None = None  # can't use the newer syntax here, otherwise the FastAPI setup breaks
 
     @app.post("/hello-post")
     async def ahello(body: Annotated[str, Body(media_type="text/plain")]) -> dict[str, str]:

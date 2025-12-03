@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import inspect
 import os
-from typing import TYPE_CHECKING, Any, Callable
+from typing import TYPE_CHECKING, Any
 
 from typing_extensions import ParamSpec
 
@@ -10,6 +10,8 @@ from falken_trace.common.config import env_vars_config
 from falken_trace.common.utils import get_outer_frames, normalize_path
 
 if TYPE_CHECKING:
+    from collections.abc import Callable
+
     from ddtrace.trace import Span, Tracer
 
 P = ParamSpec("P")

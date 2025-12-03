@@ -1,4 +1,4 @@
-from typing import Annotated, Optional
+from typing import Annotated
 
 
 def test_wrap_fastapi_entrypoint_span_with_sync_func() -> None:
@@ -14,7 +14,7 @@ def test_wrap_fastapi_entrypoint_span_with_sync_func() -> None:
 
     app = FastAPI()
 
-    span: Optional[ddtrace.trace.Span] = None  # can't use the newer syntax here, otherwise the FastAPI setup breaks
+    span: ddtrace.trace.Span | None = None  # can't use the newer syntax here, otherwise the FastAPI setup breaks
 
     @app.get("/")
     def hello() -> dict[str, str]:
@@ -56,7 +56,7 @@ def test_wrap_fastapi_entrypoint_span_with_async_func() -> None:
 
     app = FastAPI()
 
-    span: Optional[ddtrace.trace.Span] = None  # can't use the newer syntax here, otherwise the FastAPI setup breaks
+    span: ddtrace.trace.Span | None = None  # can't use the newer syntax here, otherwise the FastAPI setup breaks
 
     @app.get("/hello-get")
     async def ahello() -> dict[str, str]:
@@ -90,7 +90,7 @@ def test_wrap_fastapi_entrypoint_span_with_str_payload() -> None:
 
     app = FastAPI()
 
-    span: Optional[ddtrace.Span] = None  # can't use the newer syntax here, otherwise the FastAPI setup breaks
+    span: ddtrace.Span | None = None  # can't use the newer syntax here, otherwise the FastAPI setup breaks
 
     @app.post("/hello-post")
     async def ahello(body: Annotated[str, Body(media_type="text/plain")]) -> dict[str, str]:
@@ -124,11 +124,11 @@ def test_wrap_fastapi_entrypoint_span_with_base_model_payload() -> None:
 
     class Item(BaseModel):
         name: str
-        description: Optional[str] = None
+        description: str | None = None
 
     app = FastAPI()
 
-    span: Optional[ddtrace.trace.Span] = None  # can't use the newer syntax here, otherwise the FastAPI setup breaks
+    span: ddtrace.trace.Span | None = None  # can't use the newer syntax here, otherwise the FastAPI setup breaks
 
     @app.post("/items/")
     async def create_item(item: Item) -> Item:

@@ -23,7 +23,7 @@ requires-python = ">=3.10"
 
 dependencies = [
     "typing-extensions>=4.6.0,<5.0.0",
-    "wrapt>=1.15.0,<3.0.0", # pin till ddtrace officially supports it https://github.com/DataDog/dd-trace-py/issues/14993
+    "wrapt>=1.15.0,<3.0.0",
 ]
 
 [project.urls]
@@ -38,7 +38,7 @@ dev = [
     "prek>=0.2.19,<0.3.0",
     "pytest>=9.0.0,<10.0.0",
     # integration tests
-    "ddtrace>=3.9.1,<4.0.0",
+    "ddtrace>=3.9.1,<5.0.0",
     "fastapi>=0.115.12,<1.0.0",
     # For the FastAPI test client
     "httpx>=0.28.1,<1.0.0",

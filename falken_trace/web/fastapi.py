@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import inspect
 import os
-from typing import TYPE_CHECKING, Any, Callable, TypeVar, cast
+from typing import TYPE_CHECKING, Any, TypeVar, cast
 
 from typing_extensions import ParamSpec
 
@@ -11,7 +11,7 @@ from falken_trace.common.config import env_vars_config
 from falken_trace.common.utils import flatten_dict, normalize_path
 
 if TYPE_CHECKING:
-    from collections.abc import Awaitable
+    from collections.abc import Awaitable, Callable
 
     from ddtrace.trace import Span
     from fastapi.dependencies.models import Dependant

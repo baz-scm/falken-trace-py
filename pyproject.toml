@@ -10,7 +10,6 @@ license-files = ["LICENSE"]
 keywords = ["observability", "tracing"]
 classifiers = [
     "Programming Language :: Python :: 3 :: Only",
-    "Programming Language :: Python :: 3.9",
     "Programming Language :: Python :: 3.10",
     "Programming Language :: Python :: 3.11",
     "Programming Language :: Python :: 3.12",
@@ -20,7 +19,7 @@ classifiers = [
 ]
 readme = "README.md"
 
-requires-python = ">=3.9"
+requires-python = ">=3.10"
 
 dependencies = [
     "typing-extensions>=4.6.0,<5.0.0",
@@ -37,7 +36,7 @@ Releases = "https://github.com/baz-scm/falken-trace-py/releases"
 dev = [
     "mypy>=1.19.0,<2.0.0",
     "prek>=0.2.19,<0.3.0",
-    "pytest>=8.4.0,<9.0.0",
+    "pytest>=9.0.0,<10.0.0",
     # integration tests
     "ddtrace>=3.9.1,<4.0.0",
     "fastapi>=0.115.12,<1.0.0",
@@ -59,6 +58,8 @@ source-include = ["tests/**"]
 
 [tool.mypy]
 files = "falken_trace"
+
+python_version = "3.10"
 local_partial_types = true # will become the new default from version 2
 allow_redefinition_new = true # will become the new default from version 2
 fixed_format_cache = true # new caching mechanism
@@ -67,7 +68,7 @@ pretty = true
 
 [tool.ruff]
 line-length = 120
-target-version = "py39"
+target-version = "py310"
 
 [tool.ruff.lint]
 preview = true
@@ -104,3 +105,6 @@ fixable = ["I001"]
 
 [tool.ruff.lint.per-file-ignores]
 "tests/**/*" = ["ANN001", "ARG001", "S101"]
+
+[tool.pytest]
+strict = true

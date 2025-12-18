@@ -34,9 +34,9 @@ Releases = "https://github.com/baz-scm/falken-trace-py/releases"
 
 [dependency-groups]
 dev = [
-    "mypy>=1.19.0,<2.0.0",
-    "prek>=0.2.19,<0.3.0",
+    "prek>=0.2.22,<0.3.0",
     "pytest>=9.0.0,<10.0.0",
+    "ty>=0.0.3,<0.1.0",
     # integration tests
     "ddtrace>=3.9.1,<5.0.0",
     "fastapi>=0.115.12,<1.0.0",
@@ -55,16 +55,6 @@ required-version = "~=0.9.0"
 module-name = "falken_trace"
 module-root = ""
 source-include = ["tests/**"]
-
-[tool.mypy]
-files = "falken_trace"
-
-python_version = "3.10"
-local_partial_types = true # will become the new default from version 2
-allow_redefinition_new = true # will become the new default from version 2
-fixed_format_cache = true # new caching mechanism
-strict = true
-pretty = true
 
 [tool.ruff]
 line-length = 120
@@ -108,3 +98,12 @@ fixable = ["I001"]
 
 [tool.pytest]
 strict = true
+
+[tool.ty.environment]
+python-version = "3.10"
+
+[tool.ty.src]
+include = ["falken_trace"]
+
+[tool.ty.rules]
+unused-ignore-comment = "error"

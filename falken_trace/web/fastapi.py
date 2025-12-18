@@ -21,7 +21,7 @@ if env_vars_config.dd_trace_enabled:
         from ddtrace.trace import tracer
     except ImportError:
         # keeping it to support lower `ddtrace` versions
-        from ddtrace import tracer  # type:ignore[attr-defined]
+        from ddtrace import tracer  # ty: ignore[possibly-missing-import]
 
 T = TypeVar("T")
 P = ParamSpec("P")
@@ -56,7 +56,7 @@ async def wrap_fastapi_entrypoint_span(
     if inspect.iscoroutinefunction(wrapped):
         return await wrapped(*args, **kwargs)
     else:
-        return wrapped(*args, **kwargs)  # type:ignore[return-value]
+        return wrapped(*args, **kwargs)  # type: ignore[invalid-return-type]
 
 
 def extract_span_tags(dependant: Dependant) -> SpanTags:

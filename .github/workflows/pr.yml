@@ -10,7 +10,7 @@ permissions:
   contents: read
 
 env:
-  PREK_VERSION: '0.2.19'
+  PREK_VERSION: '0.2.22'
 
 jobs:
   prek:
@@ -23,10 +23,8 @@ jobs:
       - uses: j178/prek-action@v1
         with:
           prek-version: ${{ env.PREK_VERSION }}
-  mypy:
+  ty:
     runs-on: ubuntu-latest
-    env:
-      MYPY_CACHE_DIR: ~/.cache/mypy
     steps:
       - uses: actions/checkout@v6
       - uses: astral-sh/setup-uv@v7
@@ -34,15 +32,11 @@ jobs:
           enable-cache: true
       - name: Install dependencies
         run: uv sync --frozen
-      - uses: actions/cache@v4
-        with:
-          path: ${{ env.MYPY_CACHE_DIR }}
-          key: mypy-${{ runner.os }}-python-${{ steps.setup-python.outputs.python-version }}-${{ hashFiles('uv.lock') }}
-      - name: Run Mypy
-        run: uv run --frozen mypy
+      - name: Run ty
+        run: uv run --frozen ty check
 
   tests:
-    needs: [prek, mypy]
+    needs: [prek, ty]
     name: ${{ matrix.os }} / ${{ matrix.python-version }}
     runs-on: ${{ matrix.os }}
     strategy:

@@ -3,11 +3,16 @@ repos:
     rev: v6.0.0
     hooks:
       - id: check-json
+        priority: 0
       - id: check-toml
+        priority: 0
       - id: check-yaml
+        priority: 0
   - repo: https://github.com/astral-sh/ruff-pre-commit
     rev: v0.14.10
     hooks:
       - id: ruff-check
+        priority: 1
         args: ["--fix"]
       - id: ruff-format
+        priority: 0

@@ -21,7 +21,7 @@ if env_vars_config.dd_trace_enabled:
         from ddtrace.trace import tracer
     except ImportError:
         # keeping it to support lower `ddtrace` versions
-        from ddtrace import tracer  # ty: ignore[possibly-missing-import]
+        from ddtrace import tracer
 
 T = TypeVar("T")
 P = ParamSpec("P")

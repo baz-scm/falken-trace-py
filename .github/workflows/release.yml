@@ -13,7 +13,7 @@ permissions:
 
 jobs:
   release-please:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-slim
     environment: release
     permissions:
       contents: write # for googleapis/release-please-action to create release commit
@@ -37,7 +37,7 @@ jobs:
   release:
     if: ${{ needs.release-please.outputs.release_created }}
     needs: release-please
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-latest # `pypa/gh-action-pypi-publish` needs Docker
     environment: release
     permissions:
       # IMPORTANT: this permission is mandatory for trusted publishing to pypi

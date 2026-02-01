@@ -34,9 +34,9 @@ Releases = "https://github.com/baz-scm/falken-trace-py/releases"
 
 [dependency-groups]
 dev = [
-    "prek>=0.2.25,<0.4.0",
+    "prek>=0.3.1,<0.4.0",
     "pytest>=9.0.0,<10.0.0",
-    "ty>=0.0.8,<0.1.0",
+    "ty>=0.0.14,<0.1.0",
     # integration tests
     "ddtrace>=3.9.1,<5.0.0",
     "fastapi>=0.115.12,<1.0.0",

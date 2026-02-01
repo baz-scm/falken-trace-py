@@ -1,3 +1,4 @@
+# ruff: noqa: RUF067
 from wrapt.patches import wrap_function_wrapper
 
 from falken_trace.common import config

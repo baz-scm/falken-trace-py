@@ -10,7 +10,7 @@ permissions:
   contents: read
 
 env:
-  PREK_VERSION: '0.3.2'
+  PREK_VERSION: '0.3.x'
 
 jobs:
   prek:
@@ -20,7 +20,7 @@ jobs:
       - uses: astral-sh/setup-uv@v7
         with:
           activate-environment: true
-      - uses: j178/prek-action@v1
+      - uses: j178/prek-action@v2
         with:
           prek-version: ${{ env.PREK_VERSION }}
   ty:

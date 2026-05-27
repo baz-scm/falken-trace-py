@@ -1,5 +1,5 @@
 # ruff: noqa: RUF067
-from wrapt.patches import wrap_function_wrapper
+from wrapt import wrap_function_wrapper
 
 from falken_trace.common import config
 from falken_trace.tracing.datadog import wrap_dd_span

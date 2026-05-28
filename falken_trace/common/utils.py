@@ -19,7 +19,7 @@ def get_outer_frames(frame: FrameType | None, max_frames: int = 5) -> Iterator[i
     while frame and frame_count < max_frames:
         frame_info = (frame,) + inspect.getframeinfo(frame, 0)  # noqa: RUF005
         if frame_count:  # the first frame is itself
-            yield inspect.FrameInfo(*frame_info)
+            yield inspect.FrameInfo(*frame_info)  # type: ignore[ty:invalid-argument-type]
         frame = frame.f_back
         frame_count += 1
 
